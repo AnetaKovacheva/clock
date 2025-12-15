@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+font-family: Arial, Helvetica, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+background: #0f172a;
+color: #e5e7eb;
+}
+.timer {
+background: #020617;
+padding: 24px 32px;
+border-radius: 16px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+text-align: center;
+}
+.timer h1 {
+font-size: 1.25rem;
+margin-bottom: 12px;
+font-weight: 500;
+color: #93c5fd;
+}
+.time {
+font-size: 2rem;
+letter-spacing: 1px;
+font-weight: bold;
+}
+.label {
+font-size: 0.75rem;
+opacity: 0.7;
+margin-top: 6px;
+}
+</style>
+</head>
+<body>
+<div class="timer">
+<h1>Time left until the end of 2025</h1>
+<div class="time" id="countdown">Loading…</div>
+<div class="label">(days : hours : minutes)</div>
+</div>
+
+
+<script>
+// End of 2025: December 31, 2025, 23:59:59 (local time)
+const endOf2025 = new Date(2025, 11, 31, 23, 59, 59);
+
+
+function updateCountdown() {
+const now = new Date();
+let diff = endOf2025 - now;
+
+
+if (diff <= 0) {
+document.getElementById("countdown").textContent = "2025 is over 🎉";
+return;
+}
+
+
+const totalMinutes = Math.floor(diff / 60000);
+const days = Math.floor(totalMinutes / (60 * 24));
+const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+const minutes = totalMinutes % 60;
+
+
+document.getElementById("countdown").textContent =
+`${days} : ${hours.toString().padStart(2, '0')} : ${minutes
+.toString()
+.padStart(2, '0')}`;
+}
+
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
